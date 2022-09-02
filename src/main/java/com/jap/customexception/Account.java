@@ -2,7 +2,7 @@ package com.jap.customexception;
 
 public class Account {
 
-    private int accountBalance;
+    private final int accountBalance;
 
     public Account(int accountBalance) {
         this.accountBalance = accountBalance;
@@ -11,23 +11,23 @@ public class Account {
     //create getter and setter
 
 
-
-
-
-
-    /**
-     * This method returns the new balance deducting the withdraw amount from the balance
-     * Throws InsufficientFundException when amount to withdraw is greater than the balance
-     *
-     * @param amount
-     * @return
-     * @throws InsufficientFundException
-     *
-     */
-    public int  withdraw(int  amount) throws InsufficientFundException{
-
-        return 1;
+    public int getAccountBalance() {
+        return accountBalance;
     }
 
+    /**
+     * This method returns the new balance deducting the withdrawal amount from the balance
+     * Throws InsufficientFundException when amount to withdraw is greater than the balance
+     *
+     * @return remaining balance
+     * @throws InsufficientFundException
+     */
+    public int withdraw(int amount) throws InsufficientFundException {
+        if (amount < accountBalance) {
+            return accountBalance - amount;
+        } else {
+            throw new InsufficientFundException("Insufficient Balance");
+        }
+    }
 
 }
